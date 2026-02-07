@@ -17,7 +17,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID || "PLACEHOLDER_ID",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "PLACEHOLDER_SECRET",
-            callbackURL: process.env.BACKEND_URL ? `${process.env.BACKEND_URL}/auth/google/callback` : "http://localhost:4000/auth/google/callback",
+            callbackURL: `${process.env.BACKEND_URL}/auth/google/callback`,
         },
         (accessToken, refreshToken, profile, done) => {
 

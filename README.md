@@ -49,7 +49,7 @@ docker-compose up -d
 
 ---
 
-## 📦 Deployment Instructions (Hybrid Approach)
+## Deployment Instructions (Hybrid Approach)
 
 This project is configured for a professional hybrid deployment: **Vercel** for the Frontend and **Render** for the Backend.
 

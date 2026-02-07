@@ -1,18 +1,22 @@
 "use client";
 
-import { useState, useSyncExternalStore, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
 import { ArrowLeft, Paperclip, Clock, X, Calendar, RotateCcw } from "lucide-react";
-
-function subscribe(callback: () => void) {
-    window.addEventListener("storage", callback);
-    return () => window.removeEventListener("storage", callback);
-}
+import { useUser } from "@/hooks/useUser";
 
 export default function ComposePage() {
+    const { user } = useUser();
     const router = useRouter();
+
+    useEffect(() => {
+        if (!user) {
+            router.push("/login");
+        }
+    }, [user, router]);
+
     const [subject, setSubject] = useState("");
     const [body, setBody] = useState("");
     const [recipient, setRecipient] = useState("");
@@ -48,12 +52,7 @@ export default function ComposePage() {
     const [scheduledDate, setScheduledDate] = useState("");
     const [scheduledTime, setScheduledTime] = useState("");
 
-    const userStr = useSyncExternalStore(
-        subscribe,
-        () => localStorage.getItem("user"),
-        () => null
-    );
-    const user: { name: string; email: string; picture: string } | null = userStr ? JSON.parse(userStr) : null;
+
 
     const handleSend = async () => {
         try {

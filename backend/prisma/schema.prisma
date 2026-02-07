@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ScheduledEmail {
+  id             String   @id @default(uuid())
+  recipient      String
+  subject        String
+  body           String
+  scheduledTime  DateTime
+  status         EmailStatus @default(PENDING)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  senderId       String? // allowing null for now, or could vary
+  jobId          String? // BullMQ job ID
+  attachments    Json?   // metadata for attached files
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+}

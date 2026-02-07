@@ -14,7 +14,6 @@ export function Sidebar() {
     return (
         <aside className="w-72 bg-white flex flex-col p-6 border-r border-gray-100 min-h-screen fixed left-0 top-0">
             <div className="mb-8 pl-1">
-                <h1 className="text-4xl font-black tracking-tighter text-black">ONG</h1>
             </div>
 
             {user && (

@@ -11,21 +11,21 @@ A production-grade email scheduler service with a real-time dashboard. Built wit
 - **Docker Desktop**: For running Redis and PostgreSQL
 - **Google Cloud Console Account**: For OAuth configuration
 
-### 1. Infrastructure Setup
+### 1. Local Infrastructure Setup
 Use Docker to spin up the required Redis and PostgreSQL instances:
 ```bash
 docker-compose up -d
 ```
 *Note: Postgres runs on port 5433 and Redis on 6380 to avoid conflicts with default installations.*
 
-### 2. Backend Setup
+### 2. Backend Local Setup
 1. Navigate to the backend directory: `cd backend`
 2. Install dependencies: `npm install`
 3. Configure `.env`: Use the provided `.env` (ensure `DATABASE_URL` and `REDIS_URL` point to the Docker ports).
 4. Synchronize database: `npx prisma db push`
 5. Start the server: `npm run dev` (Runs on `http://localhost:4000`)
 
-### 3. Frontend Setup
+### 3. Frontend Local Setup
 1. Navigate to the frontend directory: `cd frontend`
 2. Install dependencies: `npm install`
 3. Start the application: `npm run dev` (Runs on `http://localhost:3000`)
@@ -40,7 +40,16 @@ docker-compose up -d
 - **Queueing Engine**: **BullMQ** handles job distribution and retries.
 - **Rate Limiting**: Configurable hourly limits (e.g., 50 emails/hour) using BullMQ's native limiter.
 - **Worker Concurrency**: Scalable worker pool for processing multiple emails simultaneously.
-## 📦 Deployment Instructions (Hybrid Approach)
+
+### Frontend
+- **Google OAuth**: Integrated authentication flow.
+- **Dashboard**: Real-time view of scheduled and sent emails with filtering.
+- **Compose Interface**: Modern UI for creating emails with multi-recipient support.
+- **CSV/Bulk Upload**: Automatically parse email addresses from uploaded files.
+
+---
+
+## Deployment Instructions (Hybrid Approach)
 
 This project is configured for a professional hybrid deployment: **Vercel** for the Frontend and **Railway** for the Backend/Worker.
 
@@ -59,17 +68,6 @@ This project is configured for a professional hybrid deployment: **Vercel** for 
 2. Select this repo and set the **Root Directory** to `/frontend`.
 3. Add the following **Environment Variable**:
    - `NEXT_PUBLIC_API_URL`: Your Railway domain.
-
----
-
-## 📄 Submission Notes
-- **GitHub Access**: Please grant access to `Mitrajit`.
-- **Demo Video**: See `submission_guide.md` for the demo script and walkthrough.
-### Frontend
-- **Google OAuth**: Integrated authentication flow.
-- **Dashboard**: Real-time view of scheduled and sent emails with filtering.
-- **Compose Interface**: Modern UI for creating emails with multi-recipient support.
-- **CSV/Bulk Upload**: Automatically parse email addresses from uploaded files.
 
 ---
 

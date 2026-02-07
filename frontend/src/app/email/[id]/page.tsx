@@ -28,7 +28,8 @@ export default function EmailDetailPage() {
 
         const fetchEmail = async () => {
             try {
-                const res = await axios.get("http://localhost:4000/api/emails");
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+                const res = await axios.get(`${apiUrl}/api/emails`);
                 const found = res.data.find((e: EmailJob) => e.id === params.id);
                 if (found) {
                     setEmail(found);

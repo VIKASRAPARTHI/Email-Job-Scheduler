@@ -86,7 +86,8 @@ export default function ComposePage() {
                     formData.append("attachments", file);
                 });
 
-                await axios.post("http://localhost:4000/api/schedule", formData, {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+                await axios.post(`${apiUrl}/api/schedule`, formData, {
                     headers: {
                         "Content-Type": "multipart/form-data"
                     }

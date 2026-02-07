@@ -40,7 +40,31 @@ docker-compose up -d
 - **Queueing Engine**: **BullMQ** handles job distribution and retries.
 - **Rate Limiting**: Configurable hourly limits (e.g., 50 emails/hour) using BullMQ's native limiter.
 - **Worker Concurrency**: Scalable worker pool for processing multiple emails simultaneously.
+## 📦 Deployment Instructions (Hybrid Approach)
 
+This project is configured for a professional hybrid deployment: **Vercel** for the Frontend and **Railway** for the Backend/Worker.
+
+### 1. Backend & Infrastructure (Railway)
+1. Fork/Push this repo to GitHub.
+2. In Railway, click **New Project** -> **GitHub Repo**.
+3. Set the **Root Directory** to `/backend`.
+4. Add a **PostgreSQL** and **Redis** service in the same project.
+5. Add the following **Environment Variables**:
+   - `FRONTEND_URL`: Your Vercel domain (e.g., `https://myapp.vercel.app`).
+   - `BACKEND_URL`: Your Railway domain (e.g., `https://backend.railway.app`).
+   - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: From Google Cloud Console.
+
+### 2. Frontend (Vercel)
+1. In Vercel, click **Add New** -> **Project**.
+2. Select this repo and set the **Root Directory** to `/frontend`.
+3. Add the following **Environment Variable**:
+   - `NEXT_PUBLIC_API_URL`: Your Railway domain.
+
+---
+
+## 📄 Submission Notes
+- **GitHub Access**: Please grant access to `Mitrajit`.
+- **Demo Video**: See `submission_guide.md` for the demo script and walkthrough.
 ### Frontend
 - **Google OAuth**: Integrated authentication flow.
 - **Dashboard**: Real-time view of scheduled and sent emails with filtering.

@@ -17,7 +17,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID || "PLACEHOLDER_ID",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || "PLACEHOLDER_SECRET",
-            callbackURL: "http://localhost:4000/auth/google/callback",
+            callbackURL: process.env.BACKEND_URL ? `${process.env.BACKEND_URL}/auth/google/callback` : "http://localhost:4000/auth/google/callback",
         },
         (accessToken, refreshToken, profile, done) => {
 
@@ -49,7 +49,8 @@ router.get(
 
 
         const userData = encodeURIComponent(JSON.stringify(user));
-        res.redirect(`http://localhost:3000/auth-success?user=${userData}`);
+        const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+        res.redirect(`${frontendUrl}/auth-success?user=${userData}`);
     }
 );
 

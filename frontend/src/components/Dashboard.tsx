@@ -30,7 +30,8 @@ export default function Dashboard() {
         const fetchEmails = async () => {
             setLoading(true);
             try {
-                const res = await axios.get("http://localhost:4000/api/emails");
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+                const res = await axios.get(`${apiUrl}/api/emails`);
                 const allEmails = res.data;
                 const filtered = allEmails.filter((e: EmailJob) =>
                     activeTab === "scheduled" ? e.status === "PENDING" : e.status !== "PENDING"

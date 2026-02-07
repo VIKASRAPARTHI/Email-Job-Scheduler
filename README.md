@@ -49,25 +49,29 @@ docker-compose up -d
 
 ---
 
-## Deployment Instructions (Hybrid Approach)
+## 📦 Deployment Instructions (Hybrid Approach)
 
-This project is configured for a professional hybrid deployment: **Vercel** for the Frontend and **Railway** for the Backend/Worker.
+This project is configured for a professional hybrid deployment: **Vercel** for the Frontend and **Render** for the Backend.
 
-### 1. Backend & Infrastructure (Railway)
+### 1. Backend & Infrastructure (Render + Upstash)
 1. Fork/Push this repo to GitHub.
-2. In Railway, click **New Project** -> **GitHub Repo**.
-3. Set the **Root Directory** to `/backend`.
-4. Add a **PostgreSQL** and **Redis** service in the same project.
-5. Add the following **Environment Variables**:
-   - `FRONTEND_URL`: Your Vercel domain (e.g., `https://myapp.vercel.app`).
-   - `BACKEND_URL`: Your Railway domain (e.g., `https://backend.railway.app`).
-   - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: From Google Cloud Console.
+2. **Database**: Create a new **PostgreSQL** instance on [Render](https://render.com).
+3. **Redis**: Create a free Redis instance on [Upstash](https://upstash.com) (required for BullMQ).
+4. **Web Service**:
+   - In Render, create a new **Web Service** and connect your repo.
+   - Set the **Root Directory** to `/backend`.
+   - **Environment Variables**:
+     - `DATABASE_URL`: Your Render Postgres connection string.
+     - `REDIS_URL`: Your Upstash Redis connection string.
+     - `FRONTEND_URL`: Your Vercel domain (e.g., `https://myapp.vercel.app`).
+     - `BACKEND_URL`: Your Render Web Service URL (e.g., `https://backend.onrender.com`).
+     - `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: From Google Cloud Console.
 
 ### 2. Frontend (Vercel)
 1. In Vercel, click **Add New** -> **Project**.
 2. Select this repo and set the **Root Directory** to `/frontend`.
-3. Add the following **Environment Variable**:
-   - `NEXT_PUBLIC_API_URL`: Your Railway domain.
+3. **Environment Variable**:
+   - `NEXT_PUBLIC_API_URL`: Your Render Web Service URL.
 
 ---
 
